@@ -57,3 +57,15 @@ def find_frame(position,sequence):
     print "Remainder:", rem, 'Frame:', frame
     return frame
 			
+#==Pull sequence from given file
+def list_seq(file_name):
+    '''This function identifies file type and pulls out sequence or 
+    first sequence to quickly view the file and test functions on it'''
+
+    file= open(file_name,'r')
+    if '.fasta' in file_name:
+        sequence= load_fasta(file_name)
+        seq= sequence.values()
+        print "Output is a list of sequences"
+    return seq
+    
