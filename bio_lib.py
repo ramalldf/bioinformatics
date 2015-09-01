@@ -57,6 +57,22 @@ def find_frame(position,sequence):
     print "Remainder:", rem, 'Frame:', frame
     return frame
 			
+def load_fasta(file_name):#Parse out seq names and seq strings
+    seqs= {}
+    file0= open(file_name)#
+    counter= 0
+    for line in file0:
+        line= line.rstrip()#rstrip gets rid of characters at the end of your last character, if nothing gets rid of empty spaces
+        if line[0]== '>':
+            words= line.split()
+            name= words[0][1:]
+            seqs[name]= ''#Can't assign value yet but we can enter key name
+#         counter= counter + 1
+#         print counter
+        else:
+            seqs[name]= seqs[name] + line #Concats dna sequence to empty dict. entry/previous header
+    return seqs            
+    
 #==Pull sequence from given file
 def list_seq(file_name):
     '''This function identifies file type and pulls out sequence or 
