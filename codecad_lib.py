@@ -45,3 +45,23 @@ def scrabble_score(word):
         else:#If acceptable, add score of character to total score
             total_score= total_score + score[word[i]]
     return total_score	
+
+def censor(text,word):
+    '''This function replaces word in text with asterisks of the same length as word'''
+    
+    word_len= len(word)#Get length of word
+    placeholder= '*'*word_len#Make place holder with asterisks same length as word
+    
+    if word not in text:#Check if occurrences of word in string
+        print 'Try new word'#If not, return nothing
+        return None
+    else:#If there are occurrences of word
+        text_list= text.split()#First split string into a list of strings
+        for i in range(0,len(text_list)):#Enumerate text list
+            if text_list[i]== word:#If item = censored word
+                print 'Modifying list'
+                text_list[i]= placeholder# Replace item with placeholder
+        
+        text_list= ' '.join(text_list)# Redefine text_list by joining text_list items with a space
+        return text_list#Return text with censors
+    
