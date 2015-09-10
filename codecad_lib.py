@@ -64,4 +64,45 @@ def censor(text,word):
         
         text_list= ' '.join(text_list)# Redefine text_list by joining text_list items with a space
         return text_list#Return text with censors
+
+def count(sequence,item):
+    '''This function turns sequence into list and counts occurrences of item in this list'''
+    counter= 0
+    if type(sequence)== list:#Check data type, if list we'll just iterate through list and count items in list
+        for i in range(0,len(sequence)):
+            print i, sequence[i], item#Just doublechecking
+            if sequence[i] == item:
+                counter+= 1#Add 1 every time it finds item
+    else:
+        list1= sequence.split()#If not a list, turn sequence into a list and do the same as above
+        for i in range(0,len(list1)):
+            print i, list1[i], item
+            if list1[i] == item:
+                counter+= 1
+    return counter
+    print counter
+	
+def purify(number_list):
+    '''This function removes all odd numbers from list and returns new list with even numbers'''
+    even_list= []#Initialize empty even list
+    for i in range(0,len(number_list)):#Iterate through original list
+        if number_list[i]%2==0:#Any element in list that has a remainder that equals zero is even
+            even_list.append(number_list[i])#Append all even elements to even list
+    return even_list
+
+def product(input_list):
+    '''This function takes list of integers and returns product of the list'''
+    total= 1#Initialize total variable, 1 works cause it can't be smaller than the smallest element
+    for i in range(0,len(input_list)):#Iterate through list
+        total= total*int(input_list[i])#Multiply current total by integer form of element i
+    return total	
+	
+def remove_duplicates(list1):
+    '''Function removes duplicates'''
+    unique= []#Initialize list of unique entries
     
+    for i in range(0,len(list1)):#Iterate through list
+        if list1[i] not in list1[0:i]:#At every entry, check if entry is in previous entries
+            unique.append(list1[i])#If not, add it to unique list
+    return unique#Return unique
+            
