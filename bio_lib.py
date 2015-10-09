@@ -73,15 +73,50 @@ def load_fasta(file_name):#Parse out seq names and seq strings
             seqs[name]= seqs[name] + line #Concats dna sequence to empty dict. entry/previous header
     return seqs            
     
-#==Pull sequence from given file
-def list_seq(file_name):
-    '''This function identifies file type and pulls out sequence or 
+#==Pull sequence from given file (not finished)
+'''def list_seq(file_name):
+   ''' '''This function identifies file type and pulls out sequence or 
     first sequence to quickly view the file and test functions on it'''
 
-    file= open(file_name,'r')
+    '''file= open(file_name,'r')
     if '.fasta' in file_name:
         sequence= load_fasta(file_name)
         seq= sequence.values()
         print "Output is a list of sequences"
-    return seq
-    
+    return seq'''
+#==Naive matching algorithm (Coursera genomic algorithms class)
+
+def naive(p, t):
+    '''Naive matching algorithm: iterates over sequence to find matching occurrences'''
+    occurrences = []
+    for i in range(len(t) - len(p) + 1):  # loop over alignments
+        match = True
+        for j in range(len(p)):  # loop over characters
+            if t[i+j] != p[j]:  # compare characters
+                match = False
+                break
+        if match:
+            occurrences.append(i)  # all chars matched; record
+    return occurrences
+
+
+#==Variation of naive with two mismatches (hw)==
+
+def naive_2mm(p, t):
+    '''Naive matching algorithm (without reverse complement) that allows 
+    up to two mismatches before break'''
+    occurrences = []
+    for i in range(len(t) - len(p) + 1):  # loop over alignments
+        match = True
+        mismatch= 0 #Initialize a counter for mismatch of characters. Resets for every alignment
+        for j in range(len(p)):  # loop over characters
+            if t[i+j] != p[j]:  # compare characters
+                mismatch = mismatch + 1 #If character comparison is off, add 1 to mismatch counter
+                
+                if mismatch > 2: #Check if mismatch counter is greater than 2
+                    match = False #If it is, break like in naive function
+                    break
+        if match:
+            occurrences.append(i)  # all chars matched; record position
+    return occurrences
+
